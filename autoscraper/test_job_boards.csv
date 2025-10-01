@@ -1,0 +1,4 @@
+name,type,base_url,is_active
+Test Board 1,indeed,https://test1.com,true
+Test Board 2,linkedin,https://test2.com,true
+Test Board 3,glassdoor,https://test3.com,false

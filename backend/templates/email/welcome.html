@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to {{ company_name }}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+        .title {
+            font-size: 24px;
+            color: #1f2937;
+            margin-bottom: 20px;
+        }
+        .welcome-message {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .content {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #10b981;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .cta-button:hover {
+            background-color: #059669;
+        }
+        .button-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .features {
+            background-color: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .features h3 {
+            color: #1f2937;
+            margin-bottom: 15px;
+        }
+        .features ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .features li:last-child {
+            border-bottom: none;
+        }
+        .features li:before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .role-badge {
+            display: inline-block;
+            background-color: #3b82f6;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 14px;
+            color: #6b7280;
+            text-align: center;
+        }
+        .support-info {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9fafb;
+            border-radius: 6px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">{{ company_name }}</div>
+            <h1 class="title">Welcome Aboard!</h1>
+        </div>
+        
+        <div class="welcome-message">
+            <h2 style="margin: 0; font-size: 22px;">🎉 Welcome to {{ company_name }}, {{ user_name }}!</h2>
+            <p style="margin: 10px 0 0 0; opacity: 0.9;">Your account as <span class="role-badge">{{ user_role }}</span> has been successfully created.</p>
+        </div>
+        
+        <div class="content">
+            <p>Hello {{ user_name }},</p>
+            
+            <p>We're thrilled to have you join the {{ company_name }} community! Your account has been successfully created and you're now ready to explore all the opportunities we have to offer.</p>
+            
+            <div class="button-container">
+                <a href="{{ login_url }}" class="cta-button">Get Started Now</a>
+            </div>
+            
+            {% if user_role == 'job_seeker' or user_role == 'freelancer' %}
+            <div class="features">
+                <h3>What you can do as a {{ user_role.replace('_', ' ').title() }}:</h3>
+                <ul>
+                    <li>Browse thousands of remote job opportunities</li>
+                    <li>Create and customize your professional profile</li>
+                    <li>Apply to jobs with one-click applications</li>
+                    <li>Set up job alerts for your preferred roles</li>
+                    <li>Track your application status in real-time</li>
+                    <li>Connect with top employers worldwide</li>
+                </ul>
+            </div>
+            {% elif user_role == 'employer' %}
+            <div class="features">
+                <h3>What you can do as an Employer:</h3>
+                <ul>
+                    <li>Post unlimited job listings</li>
+                    <li>Access our talent pool of qualified candidates</li>
+                    <li>Manage applications with our intuitive dashboard</li>
+                    <li>Schedule interviews and communicate with candidates</li>
+                    <li>Build your company profile and brand</li>
+                    <li>Get insights and analytics on your job posts</li>
+                </ul>
+            </div>
+            {% else %}
+            <div class="features">
+                <h3>Welcome to {{ company_name }}:</h3>
+                <ul>
+                    <li>Access to exclusive remote job opportunities</li>
+                    <li>Professional networking with industry leaders</li>
+                    <li>Career resources and development tools</li>
+                    <li>Regular updates on market trends</li>
+                    <li>24/7 customer support</li>
+                </ul>
+            </div>
+            {% endif %}
+            
+            <p>If you have any questions or need assistance getting started, our support team is here to help. Don't hesitate to reach out!</p>
+        </div>
+        
+        <div class="support-info">
+            <p><strong>Need Help Getting Started?</strong></p>
+            <p>Our support team is available 24/7 to assist you. Contact us at <a href="mailto:{{ support_email }}">{{ support_email }}</a></p>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2024 {{ company_name }}. All rights reserved.</p>
+            <p>Thank you for choosing {{ company_name }} for your remote work journey!</p>
+        </div>
+    </div>
+</body>
+</html>

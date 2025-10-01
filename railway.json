@@ -1,0 +1,62 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "NIXPACKS"
+  },
+  "deploy": {
+    "numReplicas": 1,
+    "sleepApplication": false,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
+  },
+  "services": [
+    {
+      "name": "backend-api",
+      "source": {
+        "repo": "remotehive-dev/backend-autoscraper",
+        "rootDirectory": "/backend"
+      },
+      "variables": {
+        "MONGODB_URL": "${{MONGODB_URL}}",
+        "REDIS_URL": "${{REDIS_URL}}",
+        "JWT_SECRET_KEY": "${{JWT_SECRET_KEY}}",
+        "JWT_ALGORITHM": "HS256",
+        "JWT_ACCESS_TOKEN_EXPIRE_MINUTES": "30",
+        "CORS_ORIGINS": "${{CORS_ORIGINS}}",
+        "CLERK_SECRET_KEY": "${{CLERK_SECRET_KEY}}",
+        "SUPABASE_URL": "${{SUPABASE_URL}}",
+        "SUPABASE_ANON_KEY": "${{SUPABASE_ANON_KEY}}",
+        "SMTP_SERVER": "${{SMTP_SERVER}}",
+        "SMTP_PORT": "${{SMTP_PORT}}",
+        "SMTP_USERNAME": "${{SMTP_USERNAME}}",
+        "SMTP_PASSWORD": "${{SMTP_PASSWORD}}",
+        "PORT": "8000"
+      },
+      "domains": [
+        {
+          "name": "api.remotehive.com"
+        }
+      ]
+    },
+    {
+      "name": "autoscraper-service",
+      "source": {
+        "repo": "remotehive-dev/backend-autoscraper",
+        "rootDirectory": "/autoscraper"
+      },
+      "variables": {
+        "MONGODB_URL": "${{MONGODB_URL}}",
+        "SQLITE_DATABASE_URL": "sqlite:///./autoscraper.db",
+        "JWT_SECRET_KEY": "${{JWT_SECRET_KEY}}",
+        "AUTOSCRAPER_API_KEY": "${{AUTOSCRAPER_API_KEY}}",
+        "OPENROUTER_API_KEY": "${{OPENROUTER_API_KEY}}",
+        "PORT": "8001"
+      },
+      "domains": [
+        {
+          "name": "autoscraper.remotehive.com"
+        }
+      ]
+    }
+  ]
+}
